@@ -6,7 +6,13 @@ import {Container} from "@chakra-ui/react";
 import {Pagination} from "../../components/Pagination";
 import {PER_PAGE} from "../../components/Pagination/Pagination";
 
-const Page: NextPage = ({posts, currentPage, totalPosts}) => {
+interface PageProps {
+    posts: any;
+    currentPage: string;
+    totalPosts: string;
+}
+
+const Page: NextPage<PageProps> = ({posts, currentPage, totalPosts}) => {
     return (
         <div>
             {/*<Head>*/}
@@ -36,7 +42,7 @@ const Page: NextPage = ({posts, currentPage, totalPosts}) => {
 
 export default Page
 
-export async function getStaticProps({params}) {
+export async function getStaticProps({params}: any) {
     const {id} = params;
 
     let {data: posts, total} = await Storyblok.get(`cdn/stories`, {

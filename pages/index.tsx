@@ -2,12 +2,19 @@ import type {NextPage} from 'next'
 
 import {Storyblok} from '../lib/storyblok';
 import DynamicComponent from "../components/storyblok/DynamicComponent"
-import { PostList } from "../components/PostList"
+import {PostList} from "../components/PostList"
 import {Container} from "@chakra-ui/react";
 import {Pagination} from "../components/Pagination";
 import {PER_PAGE} from "../components/Pagination/Pagination";
 
-const Home: NextPage = ({page, posts, currentPage, totalPosts}) => {
+interface HomePageProps {
+    page: any;
+    posts: any;
+    currentPage: string;
+    totalPosts: string;
+}
+
+const Home: NextPage<HomePageProps> = ({page, posts, currentPage, totalPosts}) => {
     return (
         <>
             {/*<Head>*/}
