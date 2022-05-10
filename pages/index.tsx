@@ -40,9 +40,8 @@ export async function getStaticProps() {
     // home is the default slug for the homepage in Storyblok
     let slug = "home";
 
-    // load the draft version
     let sbParams = {
-        version: "draft", // or 'published'
+        version: "published",
     };
 
     let {data: page} = await Storyblok.get(`cdn/stories/${slug}`, sbParams);

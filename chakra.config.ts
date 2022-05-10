@@ -15,6 +15,10 @@ export const theme = extendTheme({
             md: '780px',
             lg: '1024px',
             xl: '1280px',
-        }
+        },
+
+    },
+    fontSizes: {
+        '4.5xl': '2.5rem'
     }
 })

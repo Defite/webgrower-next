@@ -6,7 +6,7 @@ import {convertDate} from "../../helpers/date";
 import NextLink from "next/link";
 import React from "react";
 
-const Post: React.FC<PostProps> = ({title, image, intro, date, category}) => {
+const Post: React.FC<PostProps> = ({title, image, intro, date, category, slug}) => {
     const postDate = convertDate(date);
 
     return (
@@ -32,7 +32,8 @@ const Post: React.FC<PostProps> = ({title, image, intro, date, category}) => {
                 </Box>
 
                 <Box mt={5}>
-                    <NextLink href={`/posts/`}><Link fontWeight={400} color="green.600" fontSize="lg">Read more</Link></NextLink>
+                    <NextLink href={`/${category.toLowerCase()}/${slug}`}><Link fontWeight={400} color="green.600"
+                                                                          fontSize="lg">Read more</Link></NextLink>
                 </Box>
             </Box>
         </Box>

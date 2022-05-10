@@ -5,4 +5,5 @@ export interface PostProps {
     _uid: string;
     date: Date;
     category: string;
+    slug: string;
 }

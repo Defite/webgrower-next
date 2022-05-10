@@ -9,7 +9,7 @@ const PostList: React.FC<PostListProps> = ({items}) => {
     }
 
     const renderItem = (item: PostListItem) => <Post key={item.content._uid} {...item.content} date={item.created_at}
-                                                     category={item.tag_list[0]}/>
+                                                     category={item.tag_list[0]} slug={item.slug}/>
 
     return <VStack spacing={20}>{items.map(renderItem)}</VStack>;
 }
