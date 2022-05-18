@@ -1,6 +1,6 @@
 export enum CategoryColors {
-  Blog = "#529B03",
-  UI = "#ED8936",
+  blog = "#529B03",
+  ui = "#ED8936",
 }
 
 export interface StoryblokTag {
@@ -9,6 +9,7 @@ export interface StoryblokTag {
 
 export interface CategorySelectProps {
   items: Array<StoryblokTag>;
+  onChange: (value: string) => void
 }
 
 export interface ColourOption {

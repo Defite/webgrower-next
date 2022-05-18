@@ -19,6 +19,7 @@
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-select": "^5.3.2",
+    "sharp": "^0.30.4",
     "storyblok-js-client": "^4.5.0",
     "storyblok-rich-text-react-renderer-ts": "^3.1.3"
   },

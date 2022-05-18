@@ -103,7 +103,7 @@ export async function getStaticPaths() {
   const buildPaths = (story: any) => {
     return {
       params: {
-        category: story.tag_list[0].toLowerCase(),
+        categorySlug: story.tag_list[0].toLowerCase(),
         slug: story.slug,
       },
     };
