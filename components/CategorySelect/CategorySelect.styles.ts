@@ -1,6 +1,6 @@
 import chroma from "chroma-js";
 import { StylesConfig } from "react-select";
-import { ColourOption } from "../ui/Select/Select.types";
+import { ColourOption } from "./CategorySelect.types";
 export const dot = (color = "transparent") => ({
   alignItems: "center",
   display: "flex",

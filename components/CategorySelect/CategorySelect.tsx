@@ -16,7 +16,7 @@ export const colourOptions: readonly ColourOption[] = [
   { value: "silver", label: "Silver", color: "#666666" },
 ];
 
-const CategorySelect: React.FC<CategorySelectProps> = ({ items }) => {
+const CategorySelect: React.FC<CategorySelectops> = ({ items }) => {
   const options = useCategorySelect(items);
 
   return (
