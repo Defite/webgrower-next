@@ -9,7 +9,9 @@ export interface StoryblokTag {
 
 export interface CategorySelectProps {
   items: Array<StoryblokTag>;
-  onChange: (value: string) => void
+  onChange: (value: string) => void;
+  value: ColourOption | undefined;
+  placeholder?: string;
 }
 
 export interface ColourOption {

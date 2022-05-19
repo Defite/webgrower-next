@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 
 import { Storyblok } from "../../lib/storyblok";
-// import DynamicComponent from "../../components/storyblok/DynamicComponent"
 import { render } from "storyblok-rich-text-react-renderer-ts";
 import { Box, Container, Tag, Text } from "@chakra-ui/react";
 import React from "react";
