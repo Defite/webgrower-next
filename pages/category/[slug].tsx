@@ -24,7 +24,8 @@ const Page: NextPage<PageProps> = ({
   tags,
   slug,
 }) => {
-  const categoryTitle = slug.charAt(0).toUpperCase() + slug.slice(1);
+  const currentTag = tags.filter(tag => tag.name.toLowerCase() === slug);
+  const categoryTitle = currentTag[0].name;
 
   return (
     <DefaultLayout selectOptions={tags} slug={slug}>

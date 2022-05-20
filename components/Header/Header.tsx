@@ -5,10 +5,7 @@ import Link from "next/link";
 import { CategorySelect } from "../CategorySelect";
 import { HeaderProps } from "./Header.types";
 import { useRouter } from "next/router";
-import {
-  CategoryColors,
-  ColourOption,
-} from "../CategorySelect/CategorySelect.types";
+import { CategoryColors } from "../CategorySelect/CategorySelect.types";
 
 const Header: React.FC<HeaderProps> = ({ tags, slug }) => {
   const router = useRouter();
@@ -22,7 +19,7 @@ const Header: React.FC<HeaderProps> = ({ tags, slug }) => {
       return undefined;
     }
 
-    const match = tags.filter((tag) => tag.name.toLocaleLowerCase() === slug);
+    const match = tags.filter((tag) => tag.name.toLowerCase() === slug);
     const name = match[0].name;
     const value = name.toLocaleLowerCase();
 
