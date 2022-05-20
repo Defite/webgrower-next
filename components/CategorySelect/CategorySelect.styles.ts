@@ -1,6 +1,7 @@
 import chroma from "chroma-js";
 import { StylesConfig } from "react-select";
 import { ColourOption } from "./CategorySelect.types";
+
 export const dot = (color = "transparent") => ({
   alignItems: "center",
   display: "flex",
@@ -18,34 +19,16 @@ export const dot = (color = "transparent") => ({
 
 export const colourStyles: StylesConfig<ColourOption> = {
   control: (styles) => ({ ...styles, backgroundColor: "white" }),
-  option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-    const color = chroma(data.color);
+  option: (styles, { data, isDisabled }) => {
     return {
       ...styles,
       ...dot(data.color),
-      backgroundColor: isDisabled
-        ? undefined
-        : isSelected
-        ? data.color
-        : isFocused
-        ? color.alpha(0.1).css()
-        : undefined,
-      color: isDisabled
-        ? "#ccc"
-        : isSelected
-        ? chroma.contrast(color, "white") > 2
-          ? "white"
-          : "black"
-        : data.color,
+      backgroundColor: undefined,
+      color: isDisabled ? "#ccc" : "#000",
       cursor: isDisabled ? "not-allowed" : "default",
 
       ":active": {
-        ...styles[":active"],
-        backgroundColor: !isDisabled
-          ? isSelected
-            ? data.color
-            : color.alpha(0.3).css()
-          : undefined,
+        backgroundColor: "#F7FAFC",
       },
     };
   },

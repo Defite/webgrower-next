@@ -2,12 +2,15 @@ import type { NextPage } from "next";
 
 import { Storyblok } from "../../lib/storyblok";
 import { PostList } from "../../components/PostList";
-import { Container } from "@chakra-ui/react";
+import { Box, Container, Text } from "@chakra-ui/react";
 import { Pagination } from "../../components/Pagination";
 import { PER_PAGE } from "../../components/Pagination/Pagination";
 import DefaultLayout from "../../components/layouts/default";
-import { StoryblokTag } from "../../components/CategorySelect/CategorySelect.types";
-import Head from 'next/head';
+import {
+  StoryblokTag,
+  CategoryColors,
+} from "../../components/CategorySelect/CategorySelect.types";
+import Head from "next/head";
 
 interface PageProps {
   posts: any;
@@ -24,7 +27,7 @@ const Page: NextPage<PageProps> = ({
   tags,
   slug,
 }) => {
-  const currentTag = tags.filter(tag => tag.name.toLowerCase() === slug);
+  const currentTag = tags.filter((tag) => tag.name.toLowerCase() === slug);
   const categoryTitle = currentTag[0].name;
 
   return (
@@ -36,11 +39,33 @@ const Page: NextPage<PageProps> = ({
       </Head>
 
       <header>
-        <Container maxW="container.md"></Container>
+        <Container maxW="container.md">
+          <Box borderBottom="1px solid #dfdfdf" pb={12}>
+            <Box
+              as="span"
+              display="inline-block"
+              width="16px"
+              height="16px"
+              borderRadius="10px"
+              backgroundColor={
+                CategoryColors[slug as keyof typeof CategoryColors]
+              }
+              marginRight={2}
+            ></Box>
+            <Text
+              as="h1"
+              display="inline-block"
+              fontSize="2xl"
+              fontWeight="700"
+            >
+              {categoryTitle}
+            </Text>
+          </Box>
+        </Container>
       </header>
 
       <main>
-        <Container maxW="container.md">
+        <Container maxW="container.md" mt={16}>
           <PostList items={posts.stories} />
           <Pagination
             currentPage={parseInt(currentPage, 10)}
