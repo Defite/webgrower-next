@@ -19,7 +19,12 @@ const Post: React.FC<PostProps> = ({
   const categoryContent = category.content;
 
   return (
-    <Box as="article" width="100%" pl={{ base: 0, md: '148px' }} position="relative">
+    <Box
+      as="article"
+      width="100%"
+      pl={{ base: 0, md: "148px" }}
+      position="relative"
+    >
       <Box>
         <Box mb={4} display="inline-block" mr={5}>
           <Tag
@@ -41,7 +46,13 @@ const Post: React.FC<PostProps> = ({
         </Box>
       </Box>
 
-      <Text as="h1" mb={6} fontSize="4xl" fontWeight={700} lineHeight={1.2}>
+      <Text
+        as="h1"
+        mb={6}
+        fontSize={{ base: "2xl", md: "3xl" }}
+        fontWeight={700}
+        lineHeight={1.2}
+      >
         {title}
       </Text>
 
@@ -57,7 +68,7 @@ const Post: React.FC<PostProps> = ({
       </Box>
 
       <Box mt={5}>
-        <Text fontSize="lg">{intro}</Text>
+        <Text fontSize={{ base: "md", md: "lg" }}>{intro}</Text>
       </Box>
 
       <Box mt={5}>
