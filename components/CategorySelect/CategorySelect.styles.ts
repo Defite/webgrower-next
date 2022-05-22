@@ -1,4 +1,3 @@
-import chroma from "chroma-js";
 import { StylesConfig } from "react-select";
 import { ColourOption } from "./CategorySelect.types";
 

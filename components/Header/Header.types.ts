@@ -1,5 +1,5 @@
-import { StoryblokTag } from "../CategorySelect/CategorySelect.types";
+import { ColourOption} from '../CategorySelect/CategorySelect.types';
 export interface HeaderProps {
-  tags: Array<StoryblokTag>;
+  categories: Array<ColourOption>;
   slug?: string;
 }

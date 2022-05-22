@@ -1,3 +1,3 @@
-export const convertDate = (date: Date, locale = "ru-RU") => {
+export const convertDate = (date: Date | string, locale = "ru-RU") => {
   return new Date(date).toLocaleDateString(locale);
 };

@@ -16,55 +16,56 @@ const Post: React.FC<PostProps> = ({
   slug,
 }) => {
   const postDate = convertDate(date);
+  const categoryContent = category.content;
 
   return (
-    <Box as="article" display="flex" width="100%" alignContent="flex-start">
-      <Box as="aside" maxW="180px" flex={1}>
-        <Box color="lightGray">
-          <time dateTime={postDate}>{postDate}</time>
-        </Box>
-      </Box>
-      <Box flex={2}>
-        <Box mb={4}>
+    <Box as="article" width="100%" pl={{ base: 0, md: '148px' }} position="relative">
+      <Box>
+        <Box mb={4} display="inline-block" mr={5}>
           <Tag
             fontWeight={700}
             color="white"
-            bgColor={CategoryColors[category]}
+            bgColor={CategoryColors[category.slug]}
           >
-            {category.toUpperCase()}
+            {categoryContent.title.toUpperCase()}
           </Tag>
         </Box>
-
-        <Text as="h1" mb={6} fontSize="4xl" fontWeight={700} lineHeight={1.2}>
-          {title}
-        </Text>
-
         <Box
-          borderRadius={5}
-          overflow="hidden"
+          color="lightGray"
+          position={{ base: "relative", md: "absolute" }}
+          display="inline-block"
+          top="0"
+          left="0"
+        >
+          <time dateTime={postDate}>{postDate}</time>
+        </Box>
+      </Box>
+
+      <Text as="h1" mb={6} fontSize="4xl" fontWeight={700} lineHeight={1.2}>
+        {title}
+      </Text>
+
+      <Box borderRadius={5} overflow="hidden" position="relative">
+        <Image
+          src={`https:${image}`}
+          layout="responsive"
           width={600}
           height={350}
-          position="relative"
-        >
-          <Image
-            src={`https:${image}`}
-            layout="fill"
-            objectFit="cover"
-            alt={title}
-          />
-        </Box>
+          objectFit="cover"
+          alt={title}
+        />
+      </Box>
 
-        <Box mt={5}>
-          <Text fontSize="lg">{intro}</Text>
-        </Box>
+      <Box mt={5}>
+        <Text fontSize="lg">{intro}</Text>
+      </Box>
 
-        <Box mt={5}>
-          <NextLink href={`/${category.toLowerCase()}/${slug}`}>
-            <Link fontWeight={400} color="green.600" fontSize="lg">
-              Read more
-            </Link>
-          </NextLink>
-        </Box>
+      <Box mt={5}>
+        <NextLink href={`/${category.slug}/${slug}`}>
+          <Link fontWeight={400} color="green.600" fontSize="lg">
+            Read more
+          </Link>
+        </NextLink>
       </Box>
     </Box>
   );

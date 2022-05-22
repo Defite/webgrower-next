@@ -1,19 +1,11 @@
-import {
-  ColourOption,
-  CategoryColors,
-  StoryblokTag,
-} from "./CategorySelect.types";
+import { ColourOption, CategoryColors, Category } from "./CategorySelect.types";
 
-export function useCategorySelect(
-  tags: Array<StoryblokTag>
-): Array<ColourOption> {
-  return tags.map((tag: StoryblokTag) => {
-    const value = tag.name.toLowerCase() as keyof typeof CategoryColors;
-
+export function useCategorySelect(items: Array<Category>): Array<ColourOption> {
+  return items.map((item) => {
     return {
-      value,
-      label: tag.name,
-      color: CategoryColors[value],
+      value: item.content.slug,
+      label: item.content.title,
+      color: CategoryColors[item.content.slug],
     };
   });
 }

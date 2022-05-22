@@ -2,8 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['a.storyblok.com'],
+    domains: ["a.storyblok.com"],
   },
-}
+  compiler: {
+    removeConsole: true,
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

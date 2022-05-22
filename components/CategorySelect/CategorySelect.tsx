@@ -1,8 +1,7 @@
 import React from "react";
 import Select from "react-select";
-import { ColourOption, CategorySelectProps } from "./CategorySelect.types";
+import { CategorySelectProps } from "./CategorySelect.types";
 import { colourStyles } from "./CategorySelect.styles";
-import { useCategorySelect } from "./CategorySelect.utils";
 
 const CategorySelect: React.FC<CategorySelectProps> = ({
   items,
@@ -10,7 +9,6 @@ const CategorySelect: React.FC<CategorySelectProps> = ({
   value,
   placeholder,
 }) => {
-  const options = useCategorySelect(items);
   const [selectValue, setSelectValue] = React.useState(value);
 
   const handleChange = (option: any) => {
@@ -21,7 +19,7 @@ const CategorySelect: React.FC<CategorySelectProps> = ({
   return (
     <Select
       instanceId="category-select"
-      options={options}
+      options={items}
       styles={colourStyles}
       onChange={handleChange}
       value={selectValue}

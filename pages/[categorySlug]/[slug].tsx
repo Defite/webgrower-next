@@ -7,21 +7,25 @@ import React from "react";
 import Image from "next/image";
 import { convertDate } from "../../helpers/date";
 import DefaultLayout from "../../components/layouts/default";
-import { StoryblokTag } from "../../components/CategorySelect/CategorySelect.types";
+import { CategoryColors } from "../../components/CategorySelect/CategorySelect.types";
 import Head from "next/head";
+import { PostPageProps, PostCategory } from "../../types";
+import { useCategorySelect } from "../../components/CategorySelect/CategorySelect.utils";
 
-interface PostProps {
-  post: any;
-  tags: Array<StoryblokTag>;
-}
-
-const PostPage: NextPage<PostProps> = ({ post, tags }) => {
-  const { created_at, tag_list } = post;
+const PostPage: NextPage<PostPageProps> = ({
+  post,
+  currentCategory,
+  categories,
+}) => {
+  const { created_at } = post;
   const { title, image } = post.content;
   const date = convertDate(created_at);
+  const tagText = currentCategory.title.toUpperCase();
+  const tagColor = CategoryColors[currentCategory.slug];
+  const categoriesOptions = useCategorySelect(categories);
 
   return (
-    <DefaultLayout selectOptions={tags}>
+    <DefaultLayout selectOptions={categoriesOptions}>
       <Head>
         <title>{title} – Webgrower.ru</title>
         <meta name="description" content="Almost everyday web dev journal" />
@@ -42,7 +46,9 @@ const PostPage: NextPage<PostProps> = ({ post, tags }) => {
 
           <Box display="flex" mb={8}>
             <Box mr={4}>
-              <Tag fontWeight={700}>{tag_list[0].toUpperCase()}</Tag>
+              <Tag fontWeight={700} color="white" bgColor={tagColor}>
+                {tagText}
+              </Tag>
             </Box>
             <Box color="lightGray">
               <time dateTime={date}>{date}</time>
@@ -83,13 +89,24 @@ export async function getStaticProps({ params }: any) {
     `cdn/stories/posts/${params.slug}`,
     sbParams
   );
-  let { data: tagsList } = await Storyblok.get("cdn/tags/");
+
+  let { data: categories } = await Storyblok.get("cdn/stories/", {
+    starts_with: "category",
+  });
+
+  const currentCategory = categories.stories.filter(
+    (category: PostCategory) => category.uuid === post.story.content.category
+  )[0];
 
   return {
     props: {
       post: post.story,
       key: post ? post.story.id : false,
-      tags: tagsList.tags,
+      categories: categories.stories,
+      currentCategory: {
+        title: currentCategory.content.title,
+        slug: currentCategory.content.slug,
+      },
     },
     revalidate: 3600, // revalidate every hour
   };
@@ -100,10 +117,19 @@ export async function getStaticPaths() {
     starts_with: "posts",
   });
 
+  let { data: categories } = await Storyblok.get("cdn/stories/", {
+    starts_with: "category",
+  });
+
   const buildPaths = (story: any) => {
+    const category = categories.stories.filter(
+      (categoryItem: PostCategory) =>
+        categoryItem.uuid === story.content.category
+    )[0];
+
     return {
       params: {
-        categorySlug: story.tag_list[0].toLowerCase(),
+        categorySlug: category.slug,
         slug: story.slug,
       },
     };

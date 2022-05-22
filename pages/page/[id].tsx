@@ -6,24 +6,20 @@ import { Container } from "@chakra-ui/react";
 import { Pagination } from "../../components/Pagination";
 import { PER_PAGE } from "../../components/Pagination/Pagination";
 import DefaultLayout from "../../components/layouts/default";
-import { StoryblokTag } from "../../components/CategorySelect/CategorySelect.types";
-import Head from 'next/head';
-
-interface PageProps {
-  posts: any;
-  currentPage: string;
-  totalPosts: string;
-  tags: Array<StoryblokTag>;
-}
+import Head from "next/head";
+import { PageProps, Post, PostCategory } from "../../types";
+import { useCategorySelect } from "../../components/CategorySelect/CategorySelect.utils";
 
 const Page: NextPage<PageProps> = ({
   posts,
   currentPage,
   totalPosts,
-  tags,
+  categories,
 }) => {
+  const categoriesOptions = useCategorySelect(categories);
+
   return (
-    <DefaultLayout selectOptions={tags}>
+    <DefaultLayout selectOptions={categoriesOptions}>
       <Head>
         <title>Webgrower.ru</title>
         <meta name="description" content="Almost everyday web dev journal" />
@@ -36,8 +32,10 @@ const Page: NextPage<PageProps> = ({
 
       <main>
         <Container maxW="container.md">
-          <PostList items={posts.stories} />
+          <PostList items={posts} />
           <Pagination
+            url="page"
+            firstPage="home"
             currentPage={parseInt(currentPage, 10)}
             totalPosts={parseInt(totalPosts, 10)}
           />
@@ -59,15 +57,33 @@ export async function getStaticProps({ params }: any) {
     per_page: PER_PAGE,
     page: id,
   });
-  let { data: tagsList } = await Storyblok.get("cdn/tags/");
+
+  let { data: categories } = await Storyblok.get("cdn/stories/", {
+    starts_with: "category",
+  });
+
+  const postsWithCategories = posts.stories.map((post: Post) => {
+    const category = categories.stories.filter(
+      (categoryItem: PostCategory) =>
+        categoryItem.uuid === post.content.category
+    )[0];
+
+    return {
+      ...post,
+      content: {
+        ...post.content,
+        category,
+      },
+    };
+  });
 
   return {
     props: {
-      posts,
+      posts: postsWithCategories,
       key: id,
       currentPage: id,
       totalPosts: total,
-      tags: tagsList.tags,
+      categories: categories.stories,
     },
     revalidate: 3600, // revalidate every hour
   };

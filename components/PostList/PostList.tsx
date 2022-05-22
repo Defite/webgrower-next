@@ -13,7 +13,7 @@ const PostList: React.FC<PostListProps> = ({ items }) => {
       key={item.content._uid}
       {...item.content}
       date={item.created_at}
-      category={item.tag_list[0]}
+      category={item.content.category}
       slug={item.slug}
     />
   );

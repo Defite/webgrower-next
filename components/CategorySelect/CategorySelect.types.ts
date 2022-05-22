@@ -3,12 +3,16 @@ export enum CategoryColors {
   ui = "#ED8936",
 }
 
-export interface StoryblokTag {
-  name: keyof typeof CategoryColors;
+export interface Category {
+  uuid: string;
+  content: {
+    title: string;
+    slug: keyof typeof CategoryColors;
+  };
 }
 
 export interface CategorySelectProps {
-  items: Array<StoryblokTag>;
+  items: Array<ColourOption>;
   onChange: (value: string) => void;
   value: ColourOption | undefined;
   placeholder?: string;

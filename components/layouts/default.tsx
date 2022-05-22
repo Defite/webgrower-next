@@ -1,11 +1,12 @@
 import React from "react";
 import { Header } from "../Header";
 import { Footer } from "../Footer";
-import { StoryblokTag } from "../CategorySelect/CategorySelect.types";
+import { PostCategory } from "../../types";
+import { ColourOption } from "../CategorySelect/CategorySelect.types";
 
 interface DefaultLayoutProps {
   children: React.ReactNode;
-  selectOptions: Array<StoryblokTag>;
+  selectOptions: Array<ColourOption>;
   slug?: string;
 }
 
@@ -16,8 +17,8 @@ const DefaultLayout: React.FC<DefaultLayoutProps> = ({
 }) => {
   return (
     <>
-      <Header tags={selectOptions} slug={slug} />
-      <main>{children}</main>
+      <Header categories={selectOptions} slug={slug} />
+      {children}
       <Footer />
     </>
   );
