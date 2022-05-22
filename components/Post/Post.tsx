@@ -46,15 +46,17 @@ const Post: React.FC<PostProps> = ({
         </Box>
       </Box>
 
-      <Text
-        as="h1"
-        mb={6}
-        fontSize={{ base: "2xl", md: "3xl" }}
-        fontWeight={700}
-        lineHeight={1.2}
-      >
-        {title}
-      </Text>
+      <NextLink href={`/${category.slug}/${slug}`}>
+        <Link
+          as="h1"
+          mb={6}
+          fontSize={{ base: "2xl", md: "3xl" }}
+          fontWeight={700}
+          lineHeight={1.2}
+        >
+          {title}
+        </Link>
+      </NextLink>
 
       <Box borderRadius={5} overflow="hidden" position="relative">
         <Image
