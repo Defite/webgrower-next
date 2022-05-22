@@ -37,7 +37,7 @@ const PostPage: NextPage<PostPageProps> = ({
           <Text
             as="h1"
             mb={6}
-            fontSize="4.5xl"
+            fontSize={{ base: "3xl", md: "4.5xl" }}
             fontWeight={700}
             lineHeight={1.2}
           >
@@ -71,7 +71,9 @@ const PostPage: NextPage<PostPageProps> = ({
             />
           </Box>
 
-          <Box fontSize="lg">{render(post.content.long_text)}</Box>
+          <Box fontSize={{ base: "md", md: "lg" }}>
+            {render(post.content.long_text)}
+          </Box>
         </Container>
       </main>
     </DefaultLayout>
