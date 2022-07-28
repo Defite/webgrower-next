@@ -66,6 +66,7 @@ const Post: React.FC<PostProps> = ({
           height={350}
           objectFit="cover"
           alt={title}
+          priority
         />
       </Box>
 
